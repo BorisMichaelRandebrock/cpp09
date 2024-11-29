@@ -6,14 +6,14 @@
 /*   By: brandebr <brandebr@42barcelona.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 18:21:43 by brandebr          #+#    #+#             */
-/*   Updated: 2024/11/28 19:03:04 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:43:01 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange() {
-	readDatabase();
+BitcoinExchange::BitcoinExchange(const std::string &filename) {
+	readDatabase(filename);
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &cpy) {
@@ -29,7 +29,7 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &cpy) {
 
 BitcoinExchange::~BitcoinExchange() {}
 
-void BitcoinExchange::readDatabase() {
+void BitcoinExchange::readDatabase(const std::string &filename) {
 	/*std::ifstream file("data.csv");
 	  if (!file.is_open())
 	  throw FileClosedException();
@@ -46,12 +46,14 @@ void BitcoinExchange::readDatabase() {
 
 	  std::istringstream priceStream(price);
 	  if (!(priceStream >> priceValue))
-	  throw InvalidPriceFormatException(); 
+	  throw Invali:w
+	  dPriceFormatException(); 
 	  _quotes[date] = priceValue;
 	  }
 
 	  file.close();*/
-	std::ifstream file("data.csv");
+	//std::ifstream file("bdata.csv");
+	std::ifstream file(filename.c_str());
 	if (!file.is_open())
 		throw FileClosedException();
 	std::string line;
@@ -64,8 +66,9 @@ void BitcoinExchange::readDatabase() {
 
 		double priceValue = 0.0;
 		std::istringstream priceStream(price);
-		if (!(priceStream >> priceValue))
-			throw InvalidPriceFormatException();
+		priceStream >> priceValue;
+//		if (!(priceStream >> priceValue))
+//			throw InvalidPriceFormatException();
 		_quotes[date] = priceValue;
 	}
 	file.close();
@@ -77,6 +80,8 @@ bool BitcoinExchange::validateDate(const std::string &date) {
 	for (int i = 0; i < 10; i++) {
 		if (i == 4 || i == 7)
 			continue;
+	//	if (!isdigit(date[i]))
+	//		return false;
 	}
 	/*
 	   int year = atoi(date.substr(0, 4).c_str());
@@ -184,16 +189,15 @@ void BitcoinExchange::applyExchangeRate(const std::string &date, double price) {
 	std::map<std::string, double>::iterator it = _quotes.find(date);
     if (it != _quotes.end()) {
         std::cout << GREEN << date << " => " << price << " = " << std::fixed << std::setprecision(2)
-                  << (price * it->second) << RESET << std::endl;
+                  << it->second *price << RESET << std::endl;
     } else {
         std::map<std::string, double>::iterator it2 = _quotes.lower_bound(date);
         if (it2 == _quotes.begin()) {
-            std::cout << RED << "Error: no earlier exchange rate available for " << date << RESET << std::endl;
-            return;
+			std::cout << GREEN << date << " => " << price << " = " << std::fixed << std::setprecision(2) << price * it2->second << RESET << std::endl;
         }
-        --it2; // Go to the previous rate
+        --it2;
         std::cout << GREEN << date << " => " << price << " = " << std::fixed << std::setprecision(2)
-                  << (price * it2->second) << RESET << std::endl;
+                  << it2->second *price << RESET << std::endl;
     }
 }
 
@@ -221,15 +225,15 @@ void BitcoinExchange::execute(char const *fileName) {
 		  */
 		date.erase(date.find_last_not_of(" \t\n\r") + 1);
         date.erase(0, date.find_first_not_of(" \t\n\r"));
-        sValue.erase(sValue.find_last_not_of(" \t\n\r") + 1);
+       sValue.erase(sValue.find_last_not_of(" \t\n\r") + 1);
         sValue.erase(0, sValue.find_first_not_of(" \t\n\r"));
 		if (!validateDate(date)) {
 			std::cout << RED << "Error: bad input => " << date << RESET << std::endl;
 			continue ;
 		}
-		/*	if (!sValue.empty())
+	/*		if (!sValue.empty())
 			sValue = sValue.erase(0,1);
-			*/
+	*/		
 		priceValue = validatePrice(sValue);
 		if (priceValue != -1) {
 			applyExchangeRate(date, priceValue);

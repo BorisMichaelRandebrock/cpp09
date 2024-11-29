@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@42barcelona.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 18:22:03 by brandebr          #+#    #+#             */
-/*   Updated: 2024/11/28 19:30:34 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:42:11 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@
 class BitcoinExchange {
 	private:
 		std::map<std::string, double> _quotes;
-		void readDatabase();
+		void readDatabase(const std::string &filename);
 		bool validateDate(const std::string &date);
 		double validatePrice(const std::string &sValue);
 		void applyExchangeRate(const std::string &date, double price);
 
 	public:
-		BitcoinExchange();
+		BitcoinExchange(const std::string &filename);
 		BitcoinExchange(const BitcoinExchange &);
 		BitcoinExchange &operator=(const BitcoinExchange &);
 		~BitcoinExchange();
