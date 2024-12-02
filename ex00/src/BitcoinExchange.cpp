@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@42barcelona.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 18:21:43 by brandebr          #+#    #+#             */
-/*   Updated: 2024/12/02 11:50:30 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/12/02 11:55:36 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 BitcoinExchange::BitcoinExchange() {
 	readDatabase();
 }
-/*
-   BitcoinExchange::BitcoinExchange(const std::string &filename) {
-   readDatabase(filename);
-   }*/
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &cpy) {
 	if (this != &cpy)
@@ -34,10 +30,8 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &cpy) {
 BitcoinExchange::~BitcoinExchange() {}
 
 void BitcoinExchange::readDatabase() {
-	/*std::ifstream file("data.csv");
-
-	  file.close();*/
 	std::ifstream file("data.csv");
+
 	if (!file.is_open())
 		throw FileClosedException();
 	std::string line;
@@ -176,18 +170,6 @@ void BitcoinExchange::execute(char const *fileName) {
 			if (priceValue != -1)
 				applyExchangeRate(date, priceValue);
 		}
-
-
-
-		/*		priceValue = validatePrice(sValue);
-				if (priceValue != -1) {
-				applyExchangeRate(date, priceValue);
-				}
-
-
-*/
-
-
 	}
 
 	file.close();
