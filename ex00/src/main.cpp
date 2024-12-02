@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@42barcelona.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 12:13:45 by brandebr          #+#    #+#             */
-/*   Updated: 2024/12/02 11:23:33 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:04:45 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int main(int argc,  char **argv) {
 		return 1;
 	}
 	try {
-		std::cout << BOLD_RED << B_YLW << "** Money makes the World go around **" << std::endl << RESET <<std::endl;
+		std::cout << BOLD_RED << B_YLW << "** Money makes the World go around **" << RESET << std::endl <<std::endl;
 		sleep(2);
 		BitcoinExchange btc;
 		btc.execute(argv[1]);
