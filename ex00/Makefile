@@ -6,7 +6,7 @@
 #    By: brandebr <brandebr@42barcelona.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/27 18:20:56 by brandebr          #+#    #+#              #
-#    Updated: 2024/11/27 18:21:01 by brandebr         ###   ########.fr        #
+#    Updated: 2024/12/02 11:41:57 by brandebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,13 +40,13 @@ $(NAME): $(OBJ)
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
 
 valgrind: $(NAME)
-	@valgrind --leak-check=full --track-origins=yes ./$(NAME) 42
+	@valgrind --leak-check=full --track-origins=yes ./$(NAME) bdata.csv
 
 totvalgrind: $(NAME)
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) 42
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) bdata.csv
 
 sanitize: $(NAME)
-	@-fsanitize=address ./$(NAME) 
+	@-fsanitize=address ./$(NAME) bdata.csv 
 
 run: $(NAME)
 	@./$(NAME)

@@ -6,15 +6,19 @@
 /*   By: brandebr <brandebr@42barcelona.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 18:21:43 by brandebr          #+#    #+#             */
-/*   Updated: 2024/11/29 14:43:01 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/12/02 11:50:30 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange(const std::string &filename) {
-	readDatabase(filename);
+BitcoinExchange::BitcoinExchange() {
+	readDatabase();
 }
+/*
+   BitcoinExchange::BitcoinExchange(const std::string &filename) {
+   readDatabase(filename);
+   }*/
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &cpy) {
 	if (this != &cpy)
@@ -29,31 +33,11 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &cpy) {
 
 BitcoinExchange::~BitcoinExchange() {}
 
-void BitcoinExchange::readDatabase(const std::string &filename) {
+void BitcoinExchange::readDatabase() {
 	/*std::ifstream file("data.csv");
-	  if (!file.is_open())
-	  throw FileClosedException();
-	  std::string line;
-	  std::getline(file, line);
-	  while (std::getline(file, line))
-	  {
-	  std::string date, price;
-	  std::istringstream ss(line);
-	  std::getline(ss, date, ',');
-	  std::getline(ss, price, ',');
-
-	  double priceValue;
-
-	  std::istringstream priceStream(price);
-	  if (!(priceStream >> priceValue))
-	  throw Invali:w
-	  dPriceFormatException(); 
-	  _quotes[date] = priceValue;
-	  }
 
 	  file.close();*/
-	//std::ifstream file("bdata.csv");
-	std::ifstream file(filename.c_str());
+	std::ifstream file("data.csv");
 	if (!file.is_open())
 		throw FileClosedException();
 	std::string line;
@@ -63,12 +47,11 @@ void BitcoinExchange::readDatabase(const std::string &filename) {
 		std::istringstream ss(line);
 		std::getline(ss, date, ',');
 		std::getline(ss, price, ',');
-
 		double priceValue = 0.0;
 		std::istringstream priceStream(price);
-		priceStream >> priceValue;
-//		if (!(priceStream >> priceValue))
-//			throw InvalidPriceFormatException();
+
+		if (!(priceStream >> priceValue))
+			throw InvalidPriceFormatException();
 		_quotes[date] = priceValue;
 	}
 	file.close();
@@ -80,14 +63,9 @@ bool BitcoinExchange::validateDate(const std::string &date) {
 	for (int i = 0; i < 10; i++) {
 		if (i == 4 || i == 7)
 			continue;
-	//	if (!isdigit(date[i]))
-	//		return false;
+		if (!isdigit(date[i]))
+			return false;
 	}
-	/*
-	   int year = atoi(date.substr(0, 4).c_str());
-	   int month = atoi(date.substr(5, 2).c_str());
-	   int day = atoi(date.substr(8, 2).c_str());
-	   */
 	std::istringstream yearStream(date.substr(0, 4));
 	int year;
 	yearStream >> year;
@@ -122,9 +100,9 @@ bool BitcoinExchange::validateDate(const std::string &date) {
 }
 
 double BitcoinExchange::validatePrice(const std::string &sValue) {
-/*	std::string trimmedValue = sValue;
-    trimmedValue.erase(trimmedValue.find_last_not_of(" \t\n\r") + 1);
-    trimmedValue.erase(0, trimmedValue.find_first_not_of(" \t\n\r"));
+	std::string trimmedValue = sValue;
+	trimmedValue.erase(trimmedValue.find_last_not_of(" \t\n\r") + 1);
+	trimmedValue.erase(0, trimmedValue.find_first_not_of(" \t\n\r")); 
 	double priceValue;
 	std::istringstream priceStream(trimmedValue);
 
@@ -137,68 +115,27 @@ double BitcoinExchange::validatePrice(const std::string &sValue) {
 		return -1;
 	}
 	if (priceValue > 1000) {
-		std::cout << RED << "Error: too large a number. => " << trimmedValue << RESET << std::endl;
+		std::cout << RED << "Error: too large a number => " << trimmedValue << RESET << std::endl;
 		return -1;
 	}
-	return priceValue;*/
-	std::string trimmedValue = sValue; // Make a copy of sValue to trim
-    trimmedValue.erase(trimmedValue.find_last_not_of(" \t\n\r") + 1); // Trim trailing whitespace
-    trimmedValue.erase(0, trimmedValue.find_first_not_of(" \t\n\r")); // Trim leading whitespace
-
-    double priceValue;
-    std::istringstream priceStream(trimmedValue);
-
-    if (!(priceStream >> priceValue)) {
-        std::cout << RED << "Error: bad value input => " << trimmedValue << RESET << std::endl;
-        return -1; // Signal invalid price
-    }
-    if (priceValue < 0) {
-        std::cout << RED << "Error: not a positive number => " << trimmedValue << RESET << std::endl;
-        return -1; // Signal invalid price
-    }
-    if (priceValue > 1000) {
-        std::cout << RED << "Error: too large a number => " << trimmedValue << RESET << std::endl;
-        return -1; // Signal invalid price
-    }
-    return priceValue; // Valid price
+	return priceValue;
 }
 
 void BitcoinExchange::applyExchangeRate(const std::string &date, double price) {
-
-/*	std::cout << "Quotes Map: " << std::endl;
-	for (std::map<std::string, double>::iterator it = _quotes.begin(); it != _quotes.end(); ++it) {
-		std::cout << "*****Date: " << it->first << ", Rate: " << it->second << std::endl;
-	}
 	std::map<std::string, double>::iterator it = _quotes.find(date);
-	if (it != _quotes.end()){
-		std::cout << "found rate " << it->second << std::endl;
-		std::cout << GREEN << date  << " => " << price << " = " << std::fixed << std::setprecision(2) << (price * it->second) << RESET << std::endl;
-	}
-	else {
+	if (it != _quotes.end()) {
+		std::cout << GREEN << date << " => " << price << " = " << std::fixed << std::setprecision(2)
+			<< it->second *price << RESET << std::endl;
+	} else {
 		std::map<std::string, double>::iterator it2 = _quotes.lower_bound(date);
-		std::cout << "found rate lowerbound " << it2->second << std::endl;
-		if (it2 == _quotes.begin())
-			std::cout << GREEN << date << " => " << price << " = " << std::fixed << std::setprecision(2) << (price * 0.3) << RESET << std::endl;
-		else {
-			it2--;
-			std::cout << "found rate elsa " << it2->second << std::endl;
-			std::cout << GREEN << date << " => " << price << " = " << std::fixed << std::setprecision(2) << (price * 0.3) << RESET << std::endl;
+		if (it2 == _quotes.begin()) {
+			std::cout << GREEN << date << " => " << price << " = " << std::fixed << std::setprecision(2)
+				<< it2->second * price  << RESET << std::endl;
 		}
+		--it2;
+		std::cout << GREEN << date << " => " << price << " = " << std::fixed << std::setprecision(2)
+			<< it2->second *price << RESET << std::endl;
 	}
-	*/
-	std::map<std::string, double>::iterator it = _quotes.find(date);
-    if (it != _quotes.end()) {
-        std::cout << GREEN << date << " => " << price << " = " << std::fixed << std::setprecision(2)
-                  << it->second *price << RESET << std::endl;
-    } else {
-        std::map<std::string, double>::iterator it2 = _quotes.lower_bound(date);
-        if (it2 == _quotes.begin()) {
-			std::cout << GREEN << date << " => " << price << " = " << std::fixed << std::setprecision(2) << price * it2->second << RESET << std::endl;
-        }
-        --it2;
-        std::cout << GREEN << date << " => " << price << " = " << std::fixed << std::setprecision(2)
-                  << it2->second *price << RESET << std::endl;
-    }
 }
 
 void BitcoinExchange::execute(char const *fileName) {
@@ -209,7 +146,7 @@ void BitcoinExchange::execute(char const *fileName) {
 	std::string line;
 	std::getline(file, line);
 
-	if (line != "date,exchange_rate")
+	if (line != "date | value")
 		throw WrongFormatException();
 
 	while (std::getline(file, line)) {
@@ -217,27 +154,39 @@ void BitcoinExchange::execute(char const *fileName) {
 		std::string sValue;
 		double priceValue;
 		std::istringstream ss(line);
-		std::getline(ss, date, ',');
-		std::getline(ss, sValue, ',');
+		std::getline(ss, date, '|');
+		std::getline(ss, sValue, '|');
 
-		/*if (!date.empty())
-		  date = date.erase(date.length() -1);
-		  */
-		date.erase(date.find_last_not_of(" \t\n\r") + 1);
-        date.erase(0, date.find_first_not_of(" \t\n\r"));
-       sValue.erase(sValue.find_last_not_of(" \t\n\r") + 1);
-        sValue.erase(0, sValue.find_first_not_of(" \t\n\r"));
+		if (!date.empty()) {
+			date.erase(date.find_last_not_of(" \t\n\r") + 1);
+			date.erase(0, date.find_first_not_of(" \t\n\r"));
+
+			sValue.erase(sValue.find_last_not_of(" \t\n\r") + 1);
+			sValue.erase(0, sValue.find_first_not_of(" \t\n\r"));
+		}
 		if (!validateDate(date)) {
 			std::cout << RED << "Error: bad input => " << date << RESET << std::endl;
 			continue ;
 		}
-	/*		if (!sValue.empty())
-			sValue = sValue.erase(0,1);
-	*/		
-		priceValue = validatePrice(sValue);
-		if (priceValue != -1) {
-			applyExchangeRate(date, priceValue);
+		if (!sValue.empty()) {
+			sValue.erase(sValue.find_last_not_of(" \t\n\r") + 1);
+			sValue.erase(0, sValue.find_first_not_of(" \t\n\r"));
+			priceValue = validatePrice(sValue);
+
+			if (priceValue != -1)
+				applyExchangeRate(date, priceValue);
 		}
+
+
+
+		/*		priceValue = validatePrice(sValue);
+				if (priceValue != -1) {
+				applyExchangeRate(date, priceValue);
+				}
+
+
+*/
+
 
 	}
 
