@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@42barcelona.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:19:17 by brandebr          #+#    #+#             */
-/*   Updated: 2024/12/02 17:37:15 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/12/02 18:50:53 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,13 @@
 #define WHITE   "\033[37m"
 
 class RPN {
+	private:
+		std::stack<double> _stack;
+
 	public:
 		RPN();
-//		RPN(const RPN &cpy);
-//		RPN &operator=(const RPN &cpy);
+		RPN(const RPN &cpy);
+		RPN &operator=(const RPN &cpy);
 		~RPN();
 
 		double 	evaluateRPN(const std::string &epression);

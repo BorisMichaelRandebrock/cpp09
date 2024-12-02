@@ -6,13 +6,23 @@
 /*   By: brandebr <brandebr@42barcelona.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:30:41 by brandebr          #+#    #+#             */
-/*   Updated: 2024/12/02 17:19:15 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/12/02 18:56:29 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/RPN.hpp"
+#include "RPN.hpp"
 
 RPN::RPN() {}
+
+RPN::RPN(const RPN &cpy) {
+	this->_stack = cpy._stack;
+}
+
+RPN &RPN::operator=(const RPN &cpy) {
+	if (this != &cpy)
+		this->_stack = cpy._stack;
+	return *this;
+}
 
 RPN::~RPN() {}
 

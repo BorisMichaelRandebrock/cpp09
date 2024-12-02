@@ -6,11 +6,11 @@
 /*   By: brandebr <brandebr@42barcelona.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:32:44 by brandebr          #+#    #+#             */
-/*   Updated: 2024/12/02 17:39:08 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/12/02 18:56:13 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/RPN.hpp"
+#include "RPN.hpp"
 
 int main(int argc, char **argv) {
 	if (argc != 2) {
