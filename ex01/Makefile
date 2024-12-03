@@ -6,7 +6,7 @@
 #    By: brandebr <brandebr@42barcelona.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 14:17:19 by brandebr          #+#    #+#              #
-#    Updated: 2024/12/02 17:26:01 by brandebr         ###   ########.fr        #
+#    Updated: 2024/12/02 19:07:58 by brandebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,10 +40,10 @@ $(NAME): $(OBJ)
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
 
 valgrind: $(NAME)
-	@valgrind --leak-check=full --track-origins=yes ./$(NAME) "7 7 * 7 -" 
+	valgrind --leak-check=full --track-origins=yes ./$(NAME) "7 7 * 7 -" 
 
 totvalgrind: $(NAME)
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) "1 2 * 2 / 2 * 2 4 - +"
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) "1 2 * 2 / 2 * 2 4 - +"
 
 
 sanitize: $(NAME)
