@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@42barcelona.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 18:21:43 by brandebr          #+#    #+#             */
-/*   Updated: 2024/12/02 11:55:36 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/12/03 18:56:12 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,13 +122,16 @@ void BitcoinExchange::applyExchangeRate(const std::string &date, double price) {
 			<< it->second *price << RESET << std::endl;
 	} else {
 		std::map<std::string, double>::iterator it2 = _quotes.lower_bound(date);
-		if (it2 == _quotes.begin()) {
+		if (it2 == _quotes.begin() && date < it2->first) {
+            std::cout << RED << "Error: Bitcoin did not exist on " << date << RESET << std::endl;
+		} else if (it2 == _quotes.begin()) {
 			std::cout << GREEN << date << " => " << price << " = " << std::fixed << std::setprecision(2)
 				<< it2->second * price  << RESET << std::endl;
-		}
+		} else {
 		--it2;
 		std::cout << GREEN << date << " => " << price << " = " << std::fixed << std::setprecision(2)
 			<< it2->second *price << RESET << std::endl;
+		}
 	}
 }
 

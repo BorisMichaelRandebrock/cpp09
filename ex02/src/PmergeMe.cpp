@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@42barcelona.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 10:33:39 by brandebr          #+#    #+#             */
-/*   Updated: 2024/12/03 15:11:17 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/12/03 16:54:33 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,14 @@ void  PmergeMe::execute() {
 
 
 	sleep(1);
-	std::cout;
+/*	std::cout;
 	for (size_t i = 0; i < _vec.size(); ++i) {
     volatile int temp = _vec[i]; // Ensure each element is accessed
 }
 _vec.clear();
 _vec.resize(original_size);
 std::this_thread::sleep_for(std::chrono::milliseconds(100));
+*/
 	clock_t start_lst = clock();
 
 	sortList(_lst);

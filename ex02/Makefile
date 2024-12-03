@@ -6,7 +6,7 @@
 #    By: brandebr <brandebr@42barcelona.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 17:54:05 by brandebr          #+#    #+#              #
-#    Updated: 2024/12/02 17:55:46 by brandebr         ###   ########.fr        #
+#    Updated: 2024/12/03 16:52:29 by brandebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,10 @@ sanitize: $(NAME)
 	-fsanitize=address ./$(NAME)
 
 run: $(NAME)
-	./$(NAME)
+	./$(NAME)  3 5 9 7 4
+
+shuff: $(NAME)
+	./$(NAME) `shuf -i 1-100000 -n 3000 | tr "\n" " "`
 
 clean:
 	/bin/rm -f $(OBJ)
