@@ -88,9 +88,9 @@ The goal is to parse, validate, and process input to calculate Bitcoin value bas
 It provides contiguous memory storage, which ensures better cache locality, resulting in faster performance for large datasets.
 **Why `std::list`**
 
-`std::list` is used for operations that require efficient insertion and deletion of elements, which can be beneficial in some parts of the sorting algorithm. 
+`std::list` is used for operations that require efficient insertion and deletion of elements, which can be beneficial in some parts of the sorting algorithm.   
 Also, I was mistakenly assuming that `std::deque` was not to be used, thus unnecessarily complicating my life.
- 
+
 **Usage**:
 
 - Compile:
