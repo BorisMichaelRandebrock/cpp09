@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@42barcelona.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:30:41 by brandebr          #+#    #+#             */
-/*   Updated: 2024/12/02 18:56:29 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:09:38 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ bool RPN::isOperator(const std::string &token) const {
 } 
 
 double	RPN::calculate(double a, double b, const std::string &op) const {
-	if (op == "+")
-		return a + b;
-	if (op == "-")
-		return a - b;
-	if (op == "*")
+	if (!op.compare("+"))
+		return (a + b);
+	if (!op.compare("-"))
+		return (a - b);
+	if (!op.compare("*"))
 		return a * b;
-	if (op == "/") {
+	if (!op.compare("/")) {
 		if (a == 0)
 			throw std::runtime_error("Division by zero");
 		return a / b;
