@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@42barcelona.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 10:33:39 by brandebr          #+#    #+#             */
-/*   Updated: 2024/12/03 16:54:33 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/12/04 11:38:01 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,6 @@ void  PmergeMe::execute() {
 
 
 	sleep(1);
-/*	std::cout;
-	for (size_t i = 0; i < _vec.size(); ++i) {
-    volatile int temp = _vec[i]; // Ensure each element is accessed
-}
-_vec.clear();
-_vec.resize(original_size);
-std::this_thread::sleep_for(std::chrono::milliseconds(100));
-*/
 	clock_t start_lst = clock();
 
 	sortList(_lst);
@@ -75,8 +67,16 @@ std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	clock_t end_lst = clock();
 	double time_taken_lst = double(end_lst - start_lst) / CLOCKS_PER_SEC;
 	std::cout << YELLOW << "Time to process a range of " << GREEN
-		<< _lst.size() << YELLOW << " elements with std::list: " <<
+		<< _lst.size() << YELLOW << " elements with std::list:   " <<
 		std::fixed << std::setprecision(6) << GREEN << time_taken_lst * 100 << " us" << RESET << std::endl;
+}
+
+void PmergeMe::showStack(std::vector<int>& min, std::vector<int>& maj) {
+	std::cout << "minor stack: ";
+	displayResults(YELLOW, min);
+	std::cout << "major stack: ";
+	displayResults(GREEN, maj);
+	std::cout << std::endl;
 }
 
 void  PmergeMe::sortVector(std::vector<int>& _vec) {
@@ -90,9 +90,11 @@ void  PmergeMe::sortVector(std::vector<int>& _vec) {
 			if (_vec[i] < _vec[i + 1]) {
 				minor.push_back(_vec[i]);
 				major.push_back(_vec[i + 1]);
+//				showStack(minor, major);
 			} else {
 				minor.push_back(_vec[i + 1]);
 				major.push_back(_vec[i]);
+//				showStack(minor, major);
 			}
 		} else {
 			major.push_back(_vec[i]);
@@ -103,6 +105,7 @@ void  PmergeMe::sortVector(std::vector<int>& _vec) {
 	for (size_t i = 0; i < minor.size(); ++i) {
 		std::vector<int>::iterator pos = std::lower_bound(major.begin(), major.end(), minor[i]);
 		major.insert(pos, minor[i]);
+//		this->displayResults(CYAN, major);
 	}
 	_vec = major; 
 }

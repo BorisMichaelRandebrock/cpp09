@@ -6,7 +6,7 @@
 #    By: brandebr <brandebr@42barcelona.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 17:54:05 by brandebr          #+#    #+#              #
-#    Updated: 2024/12/03 16:52:29 by brandebr         ###   ########.fr        #
+#    Updated: 2024/12/04 11:26:17 by brandebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,14 +40,14 @@ $(NAME): $(OBJ)
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
 
 valgrind: $(NAME)
-	@valgrind --leak-check=full --track-origins=yes ./$(NAME)
+	@valgrind --leak-check=full --track-origins=yes ./$(NAME) 81, 14, 63, 27, 50, 9, 71, 42, 38, 19
 
 totvalgrind: $(NAME)
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) 33, 67, 12, 89, 45, 23, 78, 34, 56, 90
 
 
 sanitize: $(NAME)
-	-fsanitize=address ./$(NAME)
+	-fsanitize=address ./$(NAME) 42, 17, 93, 8, 56, 21, 74, 37, 65, 12
 
 run: $(NAME)
 	./$(NAME)  3 5 9 7 4

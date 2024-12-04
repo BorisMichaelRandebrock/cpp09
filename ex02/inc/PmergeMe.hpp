@@ -6,7 +6,7 @@
 /*   By: brandebr <brandebr@42barcelona.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 10:26:24 by brandebr          #+#    #+#             */
-/*   Updated: 2024/12/03 14:57:50 by brandebr         ###   ########.fr       */
+/*   Updated: 2024/12/04 11:01:37 by brandebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ class PmergeMe {
 		void	sortVector(std::vector<int>& vec);
 		void	sortList(std::list<int>& _lst);
 		void	displayResults(const char *color, std::vector<int> &vec);
+		void	showStack(std::vector<int>& min, std::vector<int>& maj);
 };
 
 #endif
