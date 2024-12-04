@@ -1,4 +1,5 @@
-# README for C++ Module 09: Standard Template Library (STL)
+# README for C++ Module 09: STL     
+Standard Template Library
 
 ## Overview
 
