@@ -44,9 +44,10 @@ The goal is to parse, validate, and process input to calculate Bitcoin value bas
 - This exercise implements an RPN calculator to evaluate mathematical expressions in postfix notation.
 
 **Container Choice: `std::stack`**  
-- A std::stack is used to store operands during expression evaluation and performs operations on the topmost elements.
-**Key Features**:
+- A std::stack is used to store operands during expression evaluation and performs operations on the topmost elements.    
 
+      
+**Key Features**:
 - **Expression Parsing**: Processes space-separated tokens for numbers and operators (+, -, *, /).
 - **Error Handling**: Catches errors such as insufficient operands or invalid operators.
 - **Evaluation**: The stack stores operands and computes results by popping operands and applying operators.
