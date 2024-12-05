@@ -38,7 +38,7 @@ The goal is to parse, validate, and process input to calculate Bitcoin value bas
 ```make run```: Runs the program with the example given    
 ```make valgrind```: Runs the program with example given & Valgrind to check for memory leaks.       
 ```make totalvalgrind```: Runs t.p. with example and additional flags for valgrind   
-```make``` sanitize: Compiles and runs the program with example & address sanitizers.   
+```make sanitize```: Compiles and runs the program with example & address sanitizers.   
 
 ## 2. **Reverse Polish Notation (Exercise 01)**      
 **Purpose**
