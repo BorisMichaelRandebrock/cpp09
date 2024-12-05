@@ -45,19 +45,19 @@ The goal is to parse, validate, and process input to calculate Bitcoin value bas
 - This exercise implements an RPN calculator to evaluate mathematical expressions in postfix notation.
 
 **Container Choice: `std::stack`**  
-- A std::stack is used to store operands during expression evaluation and performs operations on the topmost elements.    
+- A `std::stack` is used to store operands during expression evaluation and performs operations on the topmost elements.    
 
       
 **Key Features**:
 - **Expression Parsing**: Processes space-separated tokens for numbers and operators (+, -, *, /).
 - **Error Handling**: Catches errors such as insufficient operands or invalid operators.
 - **Evaluation**: The stack stores operands and computes results by popping operands and applying operators.
+     
 **Why `std::stack`**
-
 - `std::stack` is the best choice for a stack-based calculator, as it provides LIFO (Last In, First Out) functionality.
-- The nature of postfix notation requires pushing operands onto the stack and applying operators to the top elements, which is a perfect fit for a stack.
-**Usage**:
-
+- The nature of postfix notation requires pushing operands onto the stack and applying operators to the top elements, which is a perfect fit for a stack.   
+   
+**Usage**:   
 - Compile:
 ```make```
 ### Run:
@@ -77,19 +77,19 @@ The goal is to parse, validate, and process input to calculate Bitcoin value bas
 
 **Container Choices: `std::vector` and `std::list`**
 
-- A std::vector is used to handle random-access, while a std::list is used to benefit from efficient insertions and deletions.
+- A `std::vector` is used to handle random-access, while a std::list is used to benefit from efficient insertions and deletions.
  
 **Key Features**:
 
 - **Merge-Insertion Sort**: The program implements Ford-Johnson sorting, utilizing a combination of merge and insertion sorts.
 - **Performance Measurement**: The time taken to sort is measured and displayed.
-- **Multiple Containers**: The program demonstrates sorting with both a std::vector and a std::list and compares performance.
-**Why `std::vector`**
-
+- **Multiple Containers**: The program demonstrates sorting with both a std::vector and a std::list and compares performance.   
+   
+**Why `std::vector`**   
 `std::vector` is used for fast random access, making it ideal for algorithms that require frequent access to specific elements, like sorting.
-It provides contiguous memory storage, which ensures better cache locality, resulting in faster performance for large datasets.
-**Why `std::list`**
-
+It provides contiguous memory storage, which ensures better cache locality, resulting in faster performance for large datasets.   
+   
+**Why `std::list`**   
 `std::list` is used for operations that require efficient insertion and deletion of elements, which can be beneficial in some parts of the sorting algorithm.   
 Also, I was mistakenly assuming that `std::deque` was not to be used, thus unnecessarily complicating my life.
 
@@ -104,7 +104,7 @@ Also, I was mistakenly assuming that `std::deque` was not to be used, thus unnec
 ```make valgrind```: Runs the program with example given & Valgrind to check for memory leaks.       
 ```make totalvalgrind```: Runs t.p. with example and additional flags for valgrind.    
 ```make sanitize```: Compiles and runs the program with example & address sanitizers.    
-```make shuff```: Compiles and runs the program with 3000 random numbers.    
+```make shuff```: Compiles and runs the program with 3000 random numbers (does not work on mac, but you can run ```./PmergeMe `jot -r 3000 1 100000 | tr '\n' ' '`   to get the same outcome)```.    
 ### Special treat:
 -Uncomment the lines 93, 97 & 108 and you will be able to see the **Ford-Johnson algorithm** in action and printed in the terminal.
 ## Conclusion
