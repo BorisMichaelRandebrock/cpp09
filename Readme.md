@@ -32,8 +32,8 @@ The goal is to parse, validate, and process input to calculate Bitcoin value bas
 
 
 ### Run:
-
-```./btc input.txt```
+- Use  a file with header: **date | value**, followed by (next line) dates and values, seperated by commas, in format csv/txt to see the value of your bitcoins @ the specific date f.e.:   
+```./btc bdata.txt```
 ### Additional Commands:     
 ```make run```: Runs the program with the example given    
 ```make valgrind```: Runs the program with example given & Valgrind to check for memory leaks.       
