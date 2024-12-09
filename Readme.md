@@ -104,9 +104,10 @@ Also, I was mistakenly assuming that `std::deque` was not to be used, thus unnec
 ```make valgrind```: Runs the program with example given & Valgrind to check for memory leaks.       
 ```make totalvalgrind```: Runs t.p. with example and additional flags for valgrind.    
 ```make sanitize```: Compiles and runs the program with example & address sanitizers.    
-```make shuff```: Compiles and runs the program with 3000 random numbers (does not work on mac, but you can run ```./PmergeMe `jot -r 3000 1 100000 | tr '\n' ' '`   to get the same outcome)```.    
+```make shuff```: Compiles and runs the program with 3000 random numbers (does not work on mac, but you can run   
+```./PmergeMe `jot -r 3000 1 100000 | tr '\n' ' '` ```  to get the same outcome).    
 ### Special treat:
--Uncomment the lines 93, 97 & 108 and you will be able to see the **Ford-Johnson algorithm** in action and printed in the terminal.
+-Uncomment the lines 93, 97 & 108 (```PmergeMe.cpp```) and you will be able to see the **Ford-Johnson algorithm** in action and printed in the terminal.
 ## Conclusion
 - This project demonstrates practical uses of STL containers (std::map, std::stack, std::vector, std::list) in C++, emphasizing their efficiency and suitability for solving various algorithmic problems. Each exercise highlights the importance of choosing the right container for the task at hand, ensuring optimal performance and correctness.
 
